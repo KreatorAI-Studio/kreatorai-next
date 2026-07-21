@@ -59,7 +59,13 @@ export default function Navbar() {
             className="ncta"
             target="_blank"
             rel="noopener noreferrer"
+            style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}
           >
+            <span style={{
+              width: "6px", height: "6px", borderRadius: "50%",
+              background: "#22c55e", boxShadow: "0 0 8px #22c55e",
+              display: "inline-block"
+            }} />
             Launch App →
           </a>
           <button

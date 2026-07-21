@@ -1,6 +1,7 @@
 
 import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
+import HeroDemo from "@/components/HeroDemo";
 
 export default function Home() {
   return (
@@ -32,7 +33,7 @@ export default function Home() {
           </div>
         </div>
 
-
+        <HeroDemo />
       </div>
 
       {/* ── STATS ───────────────────────────────────── */}

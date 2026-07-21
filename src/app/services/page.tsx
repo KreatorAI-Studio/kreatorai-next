@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 
 // ── Credit cost badge helper
@@ -173,6 +176,8 @@ const contentTools = [
 ];
 
 export default function ServicesPage() {
+  const [category, setCategory] = useState<"all" | "platform" | "video" | "media" | "content">("all");
+
   return (
     <>
       <div className="page-hero">
@@ -182,23 +187,65 @@ export default function ServicesPage() {
           The all-in-one social media manager — create, schedule, publish, and track performance
           across every platform, plus 20+ AI-powered content tools, all in one place.
         </p>
+
+        {/* Category Filter Tabs */}
+        <div style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: 8,
+          flexWrap: "wrap",
+          marginTop: 32,
+        }}>
+          {[
+            { id: "all", label: "✨ All 20+ Tools" },
+            { id: "video", label: "🎬 AI Video & Avatars" },
+            { id: "media", label: "🎵 Audio & Media" },
+            { id: "content", label: "📝 Content & Writing" },
+            { id: "platform", label: "📅 Publishing & Analytics" },
+          ].map((tab) => {
+            const isActive = category === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setCategory(tab.id as any)}
+                style={{
+                  padding: "8px 18px",
+                  borderRadius: 100,
+                  fontFamily: "var(--fh)",
+                  fontSize: ".82rem",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+                  background: isActive ? "var(--grad)" : "rgba(255, 255, 255, 0.04)",
+                  color: isActive ? "#fff" : "var(--text2)",
+                  border: isActive ? "1px solid transparent" : "1px solid rgba(255, 255, 255, 0.08)",
+                  boxShadow: isActive ? "0 0 24px rgba(124, 77, 255, 0.4)" : "none",
+                }}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* ── PUBLISH, MANAGE & ANALYZE ───────────────────────────── */}
-      <div className="services-grid">
-        <div className="svc-section-label"><span>Publish, Manage & Analyze — All Platforms, One Place</span></div>
-        {platformTools.map((s, i) => (
-          <div key={i} className="svc-card hl svc-shimmer">
-            <span className="svc-icon" style={{ display: "inline-block" }}>{s.icon}</span>
-            <div className="svc-title">{s.title}</div>
-            <div className="svc-desc">{s.desc}</div>
-            <ul className="svc-list">{s.items.map((it, j) => <li key={j}>{it}</li>)}</ul>
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 12 }}>
-              <span className="svc-badge badge-free">{s.badge}</span>
+      {(category === "all" || category === "platform") && (
+        <div className="services-grid">
+          <div className="svc-section-label"><span>Publish, Manage & Analyze — All Platforms, One Place</span></div>
+          {platformTools.map((s, i) => (
+            <div key={i} className="svc-card hl svc-shimmer">
+              <span className="svc-icon" style={{ display: "inline-block" }}>{s.icon}</span>
+              <div className="svc-title">{s.title}</div>
+              <div className="svc-desc">{s.desc}</div>
+              <ul className="svc-list">{s.items.map((it, j) => <li key={j}>{it}</li>)}</ul>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 12 }}>
+                <span className="svc-badge badge-free">{s.badge}</span>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       {/* ── CREDIT EXPLAINER STRIP ──────────────────────────────── */}
       <div style={{
@@ -223,81 +270,89 @@ export default function ServicesPage() {
       </div>
 
       {/* ── STUDIO-ONLY: FACELESS & AVATAR TOOLS ─────────────────── */}
-      <div className="services-grid">
-        <div className="svc-section-label"><span>Faceless Video & AI Avatars — Studio Plan Only</span></div>
-        {studioTools.map((s, i) => (
-          <div key={i} className={`svc-card${s.hl ? " hl svc-shimmer" : ""}`}>
-            <span className="svc-icon" style={{ display: "inline-block" }}>{s.icon}</span>
-            <div className="svc-title">{s.title}</div>
-            <div className="svc-desc">{s.desc}</div>
-            <ul className="svc-list">{s.items.map((it, j) => <li key={j}>{it}</li>)}</ul>
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 12 }}>
-              <span className="svc-badge badge-pro">{s.badge}</span>
-              <span style={{
-                display: "inline-flex", alignItems: "center",
-                padding: "3px 10px", borderRadius: 100,
-                background: "rgba(6,182,212,.10)",
-                border: "1px solid rgba(6,182,212,.25)",
-                fontFamily: "var(--fh)", fontSize: ".62rem", fontWeight: 700,
-                color: "#67e8f9", letterSpacing: ".05em",
-              }}>
-                ⚡ from {s.cost}
-              </span>
+      {(category === "all" || category === "video") && (
+        <div className="services-grid">
+          <div className="svc-section-label"><span>Faceless Video & AI Avatars — Studio Plan Only</span></div>
+          {studioTools.map((s, i) => (
+            <div key={i} className={`svc-card${s.hl ? " hl svc-shimmer" : ""}`}>
+              <span className="svc-icon" style={{ display: "inline-block" }}>{s.icon}</span>
+              <div className="svc-title">{s.title}</div>
+              <div className="svc-desc">{s.desc}</div>
+              <ul className="svc-list">{s.items.map((it, j) => <li key={j}>{it}</li>)}</ul>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 12 }}>
+                <span className="svc-badge badge-pro">{s.badge}</span>
+                <span style={{
+                  display: "inline-flex", alignItems: "center",
+                  padding: "3px 10px", borderRadius: 100,
+                  background: "rgba(6,182,212,.10)",
+                  border: "1px solid rgba(6,182,212,.25)",
+                  fontFamily: "var(--fh)", fontSize: ".62rem", fontWeight: 700,
+                  color: "#67e8f9", letterSpacing: ".05em",
+                }}>
+                  ⚡ from {s.cost}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       {/* ── VIDEO / MEDIA TOOLS ─────────────────────────────────── */}
-      <div className="services-grid">
-        <div className="svc-section-label"><span>Video & Media Tools — All Plans (credit-gated)</span></div>
-        {videoTools.map((s, i) => (
-          <div key={i} className={`svc-card${s.hl ? " hl svc-shimmer" : ""}`}>
-            <span className="svc-icon" style={{ display: "inline-block" }}>{s.icon}</span>
-            <div className="svc-title">{s.title}</div>
-            <div className="svc-desc">{s.desc}</div>
-            <ul className="svc-list">{s.items.map((it, j) => <li key={j}>{it}</li>)}</ul>
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 12 }}>
-              <span className={`svc-badge ${s.badge === "Max / Studio" ? "badge-pro" : "badge-free"}`}>{s.badge}</span>
-              <span style={{
-                display: "inline-flex", alignItems: "center",
-                padding: "3px 10px", borderRadius: 100,
-                background: "rgba(124,77,255,.10)",
-                border: "1px solid rgba(124,77,255,.2)",
-                fontFamily: "var(--fh)", fontSize: ".62rem", fontWeight: 700,
-                color: "var(--p3)", letterSpacing: ".05em",
-              }}>
-                ⚡ from {s.cost}
-              </span>
+      {(category === "all" || category === "video" || category === "media") && (
+        <div className="services-grid">
+          <div className="svc-section-label"><span>Video & Media Tools — All Plans (credit-gated)</span></div>
+          {videoTools.map((s, i) => (
+            <div key={i} className={`svc-card${s.hl ? " hl svc-shimmer" : ""}`}>
+              <span className="svc-icon" style={{ display: "inline-block" }}>{s.icon}</span>
+              <div className="svc-title">{s.title}</div>
+              <div className="svc-desc">{s.desc}</div>
+              <ul className="svc-list">{s.items.map((it, j) => <li key={j}>{it}</li>)}</ul>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 12 }}>
+                <span className={`svc-badge ${s.badge === "Max / Studio" ? "badge-pro" : "badge-free"}`}>{s.badge}</span>
+                <span style={{
+                  display: "inline-flex", alignItems: "center",
+                  padding: "3px 10px", borderRadius: 100,
+                  background: "rgba(124,77,255,.10)",
+                  border: "1px solid rgba(124,77,255,.2)",
+                  fontFamily: "var(--fh)", fontSize: ".62rem", fontWeight: 700,
+                  color: "var(--p3)", letterSpacing: ".05em",
+                }}>
+                  ⚡ from {s.cost}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+      )}
 
-        {/* ── TEXT / CONTENT TOOLS ─────────────────────────────── */}
-        <div className="svc-divider" />
-        <div className="svc-section-label"><span>Content Tools — All Plans</span></div>
-        {contentTools.map((s, i) => (
-          <div key={i} className="svc-card">
-            <span className="svc-icon" style={{ display: "inline-block" }}>{s.icon}</span>
-            <div className="svc-title">{s.title}</div>
-            <div className="svc-desc">{s.desc}</div>
-            <ul className="svc-list">{s.items.map((it, j) => <li key={j}>{it}</li>)}</ul>
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 12 }}>
-              <span className="svc-badge badge-free">{s.badge}</span>
-              <span style={{
-                display: "inline-flex", alignItems: "center",
-                padding: "3px 10px", borderRadius: 100,
-                background: "rgba(124,77,255,.08)",
-                border: "1px solid rgba(124,77,255,.18)",
-                fontFamily: "var(--fh)", fontSize: ".62rem", fontWeight: 700,
-                color: "var(--p3)", letterSpacing: ".05em",
-              }}>
-                ⚡ {s.cost}
-              </span>
+      {/* ── TEXT / CONTENT TOOLS ─────────────────────────────── */}
+      {(category === "all" || category === "content") && (
+        <div className="services-grid">
+          <div className="svc-divider" />
+          <div className="svc-section-label"><span>Content Tools — All Plans</span></div>
+          {contentTools.map((s, i) => (
+            <div key={i} className="svc-card">
+              <span className="svc-icon" style={{ display: "inline-block" }}>{s.icon}</span>
+              <div className="svc-title">{s.title}</div>
+              <div className="svc-desc">{s.desc}</div>
+              <ul className="svc-list">{s.items.map((it, j) => <li key={j}>{it}</li>)}</ul>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 12 }}>
+                <span className="svc-badge badge-free">{s.badge}</span>
+                <span style={{
+                  display: "inline-flex", alignItems: "center",
+                  padding: "3px 10px", borderRadius: 100,
+                  background: "rgba(124,77,255,.08)",
+                  border: "1px solid rgba(124,77,255,.18)",
+                  fontFamily: "var(--fh)", fontSize: ".62rem", fontWeight: 700,
+                  color: "var(--p3)", letterSpacing: ".05em",
+                }}>
+                  ⚡ {s.cost}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       <div className="divl" />
 

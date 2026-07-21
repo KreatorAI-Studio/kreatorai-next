@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import CreditCalculator from "@/components/CreditCalculator";
 
 // ── Plan definitions (credit-based, USD) ─────────────────────────────────────
 const plans = [
@@ -446,6 +447,11 @@ export default function PricingPage() {
           ))}
         </div>
       </section>
+
+      {/* ── INTERACTIVE CREDIT CALCULATOR ── */}
+      <div style={{ padding: "0 var(--wrap-px)" }}>
+        <CreditCalculator />
+      </div>
 
       {/* ── CREDIT COST TABLE ── */}
       <div style={{ maxWidth: 640, margin: "0 auto", padding: "0 var(--wrap-px) clamp(56px,7vw,80px)" }}>

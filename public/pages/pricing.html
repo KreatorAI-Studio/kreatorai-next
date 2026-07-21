@@ -1,0 +1,209 @@
+<!-- ═══════════════════════════════════════════════
+     pages/pricing.html
+     Edit this file to update the Pricing page only.
+═══════════════════════════════════════════════ -->
+<style>
+  /* ── PRICING-SPECIFIC STYLES ─────────────────── */
+  .pricing { padding:60px 0 100px }
+  .pricing-hd { text-align:center; margin-bottom:52px }
+
+  .pgrid {
+    display:grid; grid-template-columns:repeat(4,1fr); gap:20px;
+    max-width:1240px; margin:0 auto; padding:0 48px;
+  }
+  .pc2 {
+    background:var(--card); border:1px solid var(--border); border-radius:24px;
+    padding:32px 28px; position:relative; overflow:hidden;
+    transition:border-color .3s, transform .3s;
+  }
+  .pc2:hover { border-color:var(--border-p); transform:translateY(-4px) }
+  .pc2.feat {
+    background:linear-gradient(160deg,rgba(124,77,255,.14),rgba(255,77,141,.09));
+    border:1.5px solid var(--border-pp);
+  }
+  .pbadge {
+    display:inline-block; padding:4px 12px; border-radius:100px;
+    background:var(--grad); font-family:var(--fh); font-size:.65rem;
+    font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#fff; margin-bottom:16px;
+  }
+  .pname { font-family:var(--fh); font-weight:700; color:var(--text2); margin-bottom:8px; text-transform:uppercase; letter-spacing:.1em; font-size:.8rem }
+  .pprice { font-family:var(--fh); font-size:2.6rem; font-weight:800; color:var(--text); margin-bottom:8px; letter-spacing:-.04em; line-height:1 }
+  .per { font-size:.85rem; font-weight:400; color:var(--text2) }
+  .pdesc { font-size:.82rem; color:var(--text2); margin-bottom:24px; line-height:1.7 }
+  .plist { list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:28px }
+  .plist li { font-size:.83rem; color:var(--text2); display:flex; align-items:flex-start; gap:9px }
+  .plist li::before { content:'✓'; color:var(--p2); font-weight:700; flex-shrink:0; margin-top:1px }
+  .plist li.no { opacity:.45 }
+  .plist li.no::before { content:'✕'; color:var(--text3) }
+  .pbtn2 {
+    display:block; text-align:center; padding:13px 20px; border-radius:100px;
+    font-family:var(--fh); font-weight:700; font-size:.88rem;
+    text-decoration:none; transition:all .25s;
+  }
+  .pbtn-f { background:var(--grad); color:#fff; box-shadow:0 0 28px rgba(124,77,255,.4) }
+  .pbtn-f:hover { transform:translateY(-2px); box-shadow:0 0 40px rgba(124,77,255,.6) }
+  .pbtn-o { background:rgba(255,255,255,.06); border:1px solid var(--border-p); color:var(--text) }
+  .pbtn-o:hover { background:rgba(255,255,255,.1); border-color:var(--border-pp) }
+
+  /* Comparison table */
+  .compare-sec { padding:60px 48px 0; max-width:1020px; margin:0 auto }
+  .compare-title { font-family:var(--fh); font-size:1.2rem; font-weight:700; text-align:center; margin-bottom:28px; color:var(--text2) }
+  .ctable { width:100%; border-collapse:separate; border-spacing:0; border:1px solid var(--border); border-radius:16px; overflow:hidden }
+  .ctable th, .ctable td { padding:14px 20px; text-align:center; border-bottom:1px solid var(--border); font-size:.83rem }
+  .ctable th { font-family:var(--fh); font-weight:700; background:rgba(255,255,255,.03); color:var(--text2); font-size:.75rem; text-transform:uppercase; letter-spacing:.1em }
+  .ctable th:first-child, .ctable td:first-child { text-align:left; color:var(--text2) }
+  .ctable tr:last-child td { border-bottom:none }
+  .ctable .hl-col { background:rgba(124,77,255,.06) }
+  .ctable .chk { color:var(--p2) }
+  .ctable .crs { color:var(--text3) }
+  .ctable tr:hover td { background:rgba(255,255,255,.02) }
+
+  /* Pricing FAQ */
+  .pricing-faq { padding:80px 48px 100px; max-width:900px; margin:0 auto }
+  .pricing-faq-title {
+    font-family:var(--fh); font-weight:800; font-size:1.4rem;
+    text-align:center; margin-bottom:28px; letter-spacing:-.02em;
+  }
+  .pricing-faq-title em { font-style:normal; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text }
+
+  @media(max-width:1100px) {
+    .pgrid { grid-template-columns:repeat(2,1fr) }
+  }
+  @media(max-width:900px) {
+    .pgrid { grid-template-columns:1fr; padding:0 24px }
+    .compare-sec { padding:40px 24px 0 }
+    .pricing-faq { padding:60px 24px 80px }
+  }
+</style>
+
+<!-- ── PAGE HERO ────────────────────────────────── -->
+<div class="page-hero">
+  <div class="kicker" style="justify-content:center;display:inline-flex">Pricing</div>
+  <h1 class="rv">Start Free.<br /><em>Scale When Ready.</em></h1>
+  <p class="rv d1">No credit card. No hidden fees. Cancel anytime.</p>
+</div>
+
+<!-- ── PRICING CARDS ────────────────────────────── -->
+<section class="pricing">
+  <div class="pgrid">
+    <!-- Starter -->
+    <div class="pc2 rv d1">
+      <div class="pname">Starter</div>
+      <div class="pprice">$0 <span class="per">/ month</span></div>
+      <p class="pdesc">For creators just discovering AI content tools.</p>
+      <ul class="plist">
+        <li>3 AI generations per day</li>
+        <li>All text tools (script, captions, hashtags, hooks, titles, descriptions)</li>
+        <li>1 connected platform</li>
+        <li>1 workspace</li>
+        <li class="no">Faceless Video & AI Avatars</li>
+        <li class="no">Automated multi-platform publishing</li>
+        <li class="no">Analytics dashboard</li>
+      </ul>
+      <a href="https://app.kreatoraistudio.com" class="pbtn2 pbtn-o" target="_blank" rel="noopener">Get Started Free</a>
+    </div>
+
+    <!-- Pro (highlighted) -->
+    <div class="pc2 feat rv d2">
+      <div class="pbadge">🔥 Most Popular</div>
+      <div class="pname">Pro</div>
+      <div class="pprice">$20 <span class="per">/ month</span></div>
+      <p class="pdesc">For serious creators who need the full AI production suite.</p>
+      <ul class="plist">
+        <li>Unlimited AI generations</li>
+        <li>All 10+ content tools</li>
+        <li>Faceless Video & AI Avatars</li>
+        <li>Advanced AI Voiceovers (ElevenLabs)</li>
+        <li>Long video → shorts converter</li>
+        <li>Automated publishing on up to 4 platforms</li>
+        <li>Analytics dashboard</li>
+        <li>1 workspace</li>
+      </ul>
+      <a href="https://app.kreatoraistudio.com" class="pbtn2 pbtn-f" target="_blank" rel="noopener">Start Pro →</a>
+    </div>
+
+    <!-- Business -->
+    <div class="pc2 rv d3">
+      <div class="pname">Business</div>
+      <div class="pprice">$100 <span class="per">/ month</span></div>
+      <p class="pdesc">For creators and small teams managing multiple brands.</p>
+      <ul class="plist">
+        <li>Everything in Pro</li>
+        <li>Unlimited connected platforms</li>
+        <li>Up to 5 workspaces</li>
+        <li>Cross-workspace analytics</li>
+        <li>Priority email support</li>
+      </ul>
+      <a href="https://app.kreatoraistudio.com" class="pbtn2 pbtn-o" target="_blank" rel="noopener">Start Business →</a>
+    </div>
+
+    <!-- Custom / Agency -->
+    <div class="pc2 rv d4">
+      <div class="pname">Custom</div>
+      <div class="pprice">Custom</div>
+      <p class="pdesc">For agencies managing many clients or creators at scale.</p>
+      <ul class="plist">
+        <li>Everything in Business</li>
+        <li>Unlimited workspaces</li>
+        <li>Team member seats & permissions</li>
+        <li>Dedicated account manager</li>
+        <li>Priority onboarding</li>
+      </ul>
+      <a href="mailto:hello@kreatoraistudio.com" class="pbtn2 pbtn-o">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMPARISON TABLE ──────────────────────────── -->
+<div class="compare-sec rv">
+  <div class="compare-title">Full Feature Comparison</div>
+  <table class="ctable">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Starter</th>
+        <th class="hl-col">Pro</th>
+        <th>Business</th>
+        <th>Custom</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Daily AI Generations</td><td>3 / day</td><td class="hl-col">Unlimited</td><td>Unlimited</td><td>Unlimited</td></tr>
+      <tr><td>Text tools (script, hooks, titles, captions, hashtags)</td><td class="chk">✓</td><td class="hl-col chk">✓</td><td class="chk">✓</td><td class="chk">✓</td></tr>
+      <tr><td>AI Image Generation</td><td class="crs">✕</td><td class="hl-col chk">✓</td><td class="chk">✓</td><td class="chk">✓</td></tr>
+      <tr><td>Faceless Video & AI Avatars</td><td class="crs">✕</td><td class="hl-col chk">✓</td><td class="chk">✓</td><td class="chk">✓</td></tr>
+      <tr><td>Advanced AI Voiceovers (ElevenLabs)</td><td class="crs">✕</td><td class="hl-col chk">✓</td><td class="chk">✓</td><td class="chk">✓</td></tr>
+      <tr><td>Long Video → Shorts Converter</td><td class="crs">✕</td><td class="hl-col chk">✓</td><td class="chk">✓</td><td class="chk">✓</td></tr>
+      <tr><td>Connected Platforms</td><td>1</td><td class="hl-col">4</td><td>Unlimited</td><td>Unlimited</td></tr>
+      <tr><td>Automated Publishing & Scheduling</td><td class="crs">✕</td><td class="hl-col chk">✓</td><td class="chk">✓</td><td class="chk">✓</td></tr>
+      <tr><td>Workspaces</td><td>1</td><td class="hl-col">1</td><td>Up to 5</td><td>Unlimited</td></tr>
+      <tr><td>Analytics Dashboard</td><td class="crs">✕</td><td class="hl-col chk">✓</td><td class="chk">✓ Cross-workspace</td><td class="chk">✓ Cross-workspace</td></tr>
+      <tr><td>Team Member Seats</td><td class="crs">✕</td><td class="crs hl-col">✕</td><td class="crs">✕</td><td class="chk">✓</td></tr>
+      <tr><td>Priority Support</td><td class="crs">✕</td><td class="hl-col crs">✕</td><td class="chk">✓</td><td class="chk">✓ Dedicated</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── PRICING FAQ ───────────────────────────────── -->
+<div class="pricing-faq">
+  <div class="pricing-faq-title">Pricing <em>Questions</em></div>
+  <div class="fgrid2">
+    <div class="fi rv"><div class="fq">Is the free plan really free?<span class="fqi"></span></div><div class="fa"><div class="fa-in">Completely free. No credit card required. 3 generations per day, forever — no trial expiry. All text tools are always free, with 1 connected platform and 1 workspace.</div></div></div>
+    <div class="fi rv d1"><div class="fq">What payment methods do you accept?<span class="fqi"></span></div><div class="fa"><div class="fa-in">We accept all major international cards via Stripe. Local payment methods vary by region and are added regularly.</div></div></div>
+    <div class="fi rv d2"><div class="fq">Can I switch plans anytime?<span class="fqi"></span></div><div class="fa"><div class="fa-in">Yes. Upgrade, downgrade, or cancel at any time. Upgrades take effect immediately. Downgrades apply at the end of your billing cycle.</div></div></div>
+    <div class="fi rv d3"><div class="fq">What's the difference between Pro and Business?<span class="fqi"></span></div><div class="fa"><div class="fa-in">Pro is built for a single creator on one workspace with up to 4 connected platforms. Business adds unlimited platform connections and up to 5 workspaces, ideal for managing multiple brands or clients.</div></div></div>
+  </div>
+</div>
+
+<div class="divl" style="margin:0 48px"></div>
+
+<!-- ── CTA ─────────────────────────────────────── -->
+<div class="cta-b rv" style="margin:80px 48px">
+  <div class="cta-b-left">
+    <h2>No Risk. <em>Just Results.</em></h2>
+    <p>Start free today. Upgrade when you're ready to go unlimited.</p>
+  </div>
+  <div class="cta-b-btns">
+    <a href="https://app.kreatoraistudio.com" class="btn btn-p" target="_blank" rel="noopener">Start Free Today</a>
+  </div>
+</div>

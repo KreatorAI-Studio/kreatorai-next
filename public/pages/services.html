@@ -1,0 +1,348 @@
+<!-- ═══════════════════════════════════════════════
+     pages/services.html
+     Edit this file to update the Services page only.
+═══════════════════════════════════════════════ -->
+<style>
+  /* ── SERVICES-SPECIFIC STYLES ────────────────── */
+  .services-grid {
+    display:grid; grid-template-columns:repeat(2,1fr); gap:24px;
+    padding:60px 48px 100px; max-width:1160px; margin:0 auto;
+  }
+  .svc-card {
+    background:var(--card); border:1px solid var(--border); border-radius:24px;
+    padding:36px; position:relative; overflow:hidden;
+    transition:border-color .3s, transform .3s, background .3s;
+  }
+  .svc-card:hover { border-color:var(--border-pp); background:rgba(124,77,255,.05); transform:translateY(-5px) }
+  .svc-card::after {
+    content:''; position:absolute; top:0; right:0; width:120px; height:120px;
+    background:radial-gradient(circle,rgba(124,77,255,.1),transparent 70%);
+    pointer-events:none;
+  }
+  .svc-card.hl {
+    background:linear-gradient(145deg,rgba(124,77,255,.12),rgba(255,77,141,.07));
+    border-color:var(--border-pp);
+  }
+  .svc-card.hl::after { background:radial-gradient(circle,rgba(255,77,141,.12),transparent 70%) }
+  .svc-icon { font-size:2.4rem; margin-bottom:18px; display:block }
+  .svc-title { font-family:var(--fh); font-size:1.2rem; font-weight:800; letter-spacing:-.02em; margin-bottom:10px; color:var(--text) }
+  .svc-desc { font-size:.9rem; color:var(--text2); line-height:1.82; margin-bottom:20px }
+  .svc-list { list-style:none; display:flex; flex-direction:column; gap:8px }
+  .svc-list li { font-size:.83rem; color:var(--text2); display:flex; align-items:flex-start; gap:8px }
+  .svc-list li::before { content:'→'; color:var(--p2); font-size:.75rem; flex-shrink:0; margin-top:2px }
+  .svc-badge {
+    display:inline-block; margin-top:16px; padding:3px 12px; border-radius:100px;
+    font-size:.62rem; font-weight:700; font-family:var(--fh); letter-spacing:.06em; text-transform:uppercase;
+  }
+  .badge-pro  { background:rgba(255,77,141,.12); color:var(--pk2); border:1px solid rgba(255,77,141,.25) }
+  .badge-free { background:rgba(124,77,255,.12); color:var(--p3); border:1px solid rgba(124,77,255,.25) }
+
+  .svc-divider {
+    grid-column:1/-1; height:1px;
+    background:linear-gradient(90deg,transparent,var(--border-p) 25%,var(--border-p) 75%,transparent);
+    margin:8px 0;
+  }
+  .svc-section-label {
+    grid-column:1/-1; display:flex; align-items:center; gap:12px; margin-bottom:-8px;
+  }
+  .svc-section-label span {
+    font-family:var(--fh); font-size:.65rem; font-weight:700;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--text3); white-space:nowrap;
+  }
+  .svc-section-label::after { content:''; flex:1; height:1px; background:var(--border) }
+
+  @media(max-width:900px) {
+    .services-grid { grid-template-columns:1fr; padding:40px 24px 60px }
+    .svc-divider { margin:0 }
+  }
+</style>
+
+<!-- ── PAGE HERO ────────────────────────────────── -->
+<div class="page-hero">
+  <div class="kicker" style="justify-content:center;display:inline-flex">Our Services</div>
+  <h1 class="rv">The All-In-One<br /><em>Social Media Toolkit</em></h1>
+  <p class="rv d1">Create content, publish it everywhere, and track what works — every tool for the modern creator's full social media workflow, in one platform.</p>
+</div>
+
+<!-- ── SERVICES GRID ────────────────────────────── -->
+<div class="services-grid">
+
+  <!-- Publishing Section Label -->
+  <div class="svc-section-label rv">
+    <span>Publishing & Management</span>
+  </div>
+
+  <!-- 1. Automated Multi-Platform Publishing (FIRST — headline feature) -->
+  <div class="svc-card hl rv d1">
+    <span class="svc-icon">📅</span>
+    <div class="svc-title">Automated Multi-Platform Publishing</div>
+    <div class="svc-desc">Connect Instagram, LinkedIn, X, YouTube and more, then schedule or auto-publish your content to all of them from one calendar. Plan once, post everywhere.</div>
+    <ul class="svc-list">
+      <li>Schedule across Instagram, LinkedIn, X, YouTube & more</li>
+      <li>Unified content calendar for every platform</li>
+      <li>Auto-publish at your chosen time</li>
+      <li>Bulk scheduling for whole campaigns</li>
+    </ul>
+    <span class="svc-badge badge-pro">Pro</span>
+  </div>
+
+  <!-- 2. Cross-Platform Analytics -->
+  <div class="svc-card hl rv d2">
+    <span class="svc-icon">📊</span>
+    <div class="svc-title">Cross-Platform Analytics</div>
+    <div class="svc-desc">See how every post performs across every platform, side by side, in a single dashboard — no more switching between apps to check numbers.</div>
+    <ul class="svc-list">
+      <li>Unified analytics across all connected platforms</li>
+      <li>Engagement, reach, and growth tracking</li>
+      <li>Best-performing content insights</li>
+      <li>Per-platform and combined views</li>
+    </ul>
+    <span class="svc-badge badge-pro">Pro</span>
+  </div>
+
+  <!-- 3. Multiple Workspaces -->
+  <div class="svc-card rv d1">
+    <span class="svc-icon">🗂️</span>
+    <div class="svc-title">Multiple Workspaces</div>
+    <div class="svc-desc">Manage several brands, clients, or creator accounts side by side. Each workspace keeps its own content, schedule, connected platforms, and analytics separate.</div>
+    <ul class="svc-list">
+      <li>Unlimited content and platform separation per workspace</li>
+      <li>Switch between workspaces instantly</li>
+      <li>Ideal for agencies and multi-brand creators</li>
+      <li>Independent scheduling per workspace</li>
+    </ul>
+    <span class="svc-badge badge-pro">Pro</span>
+  </div>
+
+  <div class="svc-divider rv"></div>
+
+  <!-- Video & Avatars Section Label -->
+  <div class="svc-section-label rv">
+    <span>Video, Avatars & Voice</span>
+  </div>
+
+  <!-- 4. Faceless Video Creation -->
+  <div class="svc-card hl rv d2">
+    <span class="svc-icon">🎬</span>
+    <div class="svc-title">Faceless Video Creation</div>
+    <div class="svc-desc">Generate complete faceless videos from a text prompt — no camera, no filming. B-roll sequences, cinematic shorts, and product showcases, fully automated.</div>
+    <ul class="svc-list">
+      <li>Text-to-video in seconds</li>
+      <li>Cinematic styles, b-roll sequences, product shots</li>
+      <li>Export-ready resolution for social platforms</li>
+      <li>Unlimited on Pro plan</li>
+    </ul>
+    <span class="svc-badge badge-pro">Pro</span>
+  </div>
+
+  <!-- 5. Custom AI Avatar Generation -->
+  <div class="svc-card rv d1">
+    <span class="svc-icon">🧑‍🎤</span>
+    <div class="svc-title">Custom AI Avatar Generation</div>
+    <div class="svc-desc">Create your own AI avatar and simply tell it what to say — it presents your content for you. Great for creators who want a face on camera without being on camera.</div>
+    <ul class="svc-list">
+      <li>Build a reusable custom avatar</li>
+      <li>Prompt-based scripting for the avatar</li>
+      <li>Natural lip-sync and expressions</li>
+      <li>Use across unlimited videos</li>
+    </ul>
+    <span class="svc-badge badge-pro">Pro</span>
+  </div>
+
+  <!-- 6. Advanced AI Voiceovers (ElevenLabs) -->
+  <div class="svc-card rv d2">
+    <span class="svc-icon">🎙️</span>
+    <div class="svc-title">Advanced AI Voiceovers</div>
+    <div class="svc-desc">Studio-quality voice-overs powered by ElevenLabs. Natural, expressive AI voices plus speech-to-text captioning, all without leaving the app.</div>
+    <ul class="svc-list">
+      <li>ElevenLabs-powered text-to-speech</li>
+      <li>Multiple voice styles and accents</li>
+      <li>Auto-caption from audio (speech-to-text)</li>
+      <li>Synced caption export for any platform</li>
+    </ul>
+    <span class="svc-badge badge-pro">Pro</span>
+  </div>
+
+  <!-- 7. Long Video to Shorts Converter -->
+  <div class="svc-card rv d1">
+    <span class="svc-icon">✂️</span>
+    <div class="svc-title">Long Video → Shorts Converter</div>
+    <div class="svc-desc">Upload a full-length video and let AI find and cut the best moments into short-form clips, ready for Reels, Shorts, and TikTok.</div>
+    <ul class="svc-list">
+      <li>Auto-detects highlight moments</li>
+      <li>Reformats to vertical short-form</li>
+      <li>Auto-captions included on export</li>
+      <li>Multiple clips per upload</li>
+    </ul>
+    <span class="svc-badge badge-pro">Pro</span>
+  </div>
+
+  <!-- 8. AI Image Generation -->
+  <div class="svc-card rv d2">
+    <span class="svc-icon">🖼️</span>
+    <div class="svc-title">AI Image Generation</div>
+    <div class="svc-desc">Generate 4 high-resolution images per prompt using state-of-the-art diffusion models. Perfect for thumbnails, mood boards, and brand visuals.</div>
+    <ul class="svc-list">
+      <li>4 unique outputs per generation</li>
+      <li>High-resolution exports</li>
+      <li>Style prompting for brand consistency</li>
+      <li>Unlimited on Pro plan</li>
+    </ul>
+    <span class="svc-badge badge-pro">Pro</span>
+  </div>
+
+  <!-- 9. B-Roll Idea Generator -->
+  <div class="svc-card rv d1">
+    <span class="svc-icon">🎥</span>
+    <div class="svc-title">B-Roll Idea Generator</div>
+    <div class="svc-desc">Never face a blank timeline again. Paste your script and get a complete b-roll shot list with visual descriptions, angles, and pacing suggestions.</div>
+    <ul class="svc-list">
+      <li>Shot-by-shot visual descriptions</li>
+      <li>Camera angle & movement suggestions</li>
+      <li>Mood and lighting notes</li>
+      <li>Export as production checklist</li>
+    </ul>
+    <span class="svc-badge badge-free">Free</span>
+  </div>
+
+  <div class="svc-divider rv"></div>
+
+  <!-- Text & Strategy Section Label -->
+  <div class="svc-section-label rv">
+    <span>Text & Strategy AI</span>
+  </div>
+
+  <!-- 10. Script Generator -->
+  <div class="svc-card rv d2">
+    <span class="svc-icon">📝</span>
+    <div class="svc-title">Script Generator</div>
+    <div class="svc-desc">Generate shot-by-shot scripts for Reels, YouTube Shorts, and long-form content. Describe your idea, pick your niche and platform — get a production-ready script in seconds.</div>
+    <ul class="svc-list">
+      <li>Shot descriptions, dialogue, transitions</li>
+      <li>Platform-optimised (Reels, Shorts, TikTok)</li>
+      <li>Hook-first structure to maximise watch time</li>
+      <li>Multiple language support</li>
+    </ul>
+    <span class="svc-badge badge-free">Free</span>
+  </div>
+
+  <!-- 11. Hook Generator -->
+  <div class="svc-card rv d1">
+    <span class="svc-icon">🪝</span>
+    <div class="svc-title">Hook Generator</div>
+    <div class="svc-desc">The first line decides if someone keeps watching. Get scroll-stopping hooks tailored to your niche, platform, and content format.</div>
+    <ul class="svc-list">
+      <li>Multiple hook styles per prompt</li>
+      <li>Platform and format aware</li>
+      <li>Tone-matched to your niche</li>
+      <li>One-tap copy to clipboard</li>
+    </ul>
+    <span class="svc-badge badge-free">Free</span>
+  </div>
+
+  <!-- 12. Title Generator -->
+  <div class="svc-card rv d2">
+    <span class="svc-icon">🔤</span>
+    <div class="svc-title">Title Generator</div>
+    <div class="svc-desc">Generate click-worthy titles for YouTube, Reels, and posts — optimised for the platform you're publishing to.</div>
+    <ul class="svc-list">
+      <li>Multiple title variants per prompt</li>
+      <li>Platform-specific optimisation</li>
+      <li>SEO-aware phrasing for YouTube</li>
+      <li>One-tap copy to clipboard</li>
+    </ul>
+    <span class="svc-badge badge-free">Free</span>
+  </div>
+
+  <!-- 13. Description Generator -->
+  <div class="svc-card rv d1">
+    <span class="svc-icon">📄</span>
+    <div class="svc-title">Description Generator</div>
+    <div class="svc-desc">Write platform-ready post and video descriptions in seconds — tone-matched to your brand, with room for links, CTAs, and keywords.</div>
+    <ul class="svc-list">
+      <li>Platform-specific length and format</li>
+      <li>Built-in call-to-action suggestions</li>
+      <li>SEO-aware for YouTube descriptions</li>
+      <li>Tone options to match your brand</li>
+    </ul>
+    <span class="svc-badge badge-free">Free</span>
+  </div>
+
+  <!-- 14. Caption Generator -->
+  <div class="svc-card rv d2">
+    <span class="svc-icon">✍️</span>
+    <div class="svc-title">Caption Generator</div>
+    <div class="svc-desc">Hook-first captions that stop the scroll. AI writes in your voice — matched to your niche, tone, and platform — with built-in CTAs and emoji integration.</div>
+    <ul class="svc-list">
+      <li>Multiple tone options (witty, professional, casual)</li>
+      <li>Built-in call-to-action suggestions</li>
+      <li>Character count awareness per platform</li>
+      <li>Emoji-native and emoji-free modes</li>
+    </ul>
+    <span class="svc-badge badge-free">Free</span>
+  </div>
+
+  <!-- 15. Hashtag Generator -->
+  <div class="svc-card rv d1">
+    <span class="svc-icon">#️⃣</span>
+    <div class="svc-title">Hashtag Generator</div>
+    <div class="svc-desc">Stop guessing hashtags. Our engine analyses trends, your niche, and your target platform to deliver optimised hashtag sets ranked by potential reach.</div>
+    <ul class="svc-list">
+      <li>Niche + trending combination sets</li>
+      <li>Platform-specific (IG, YouTube, TikTok, LinkedIn)</li>
+      <li>Mix of broad and micro hashtags</li>
+      <li>One-tap copy to clipboard</li>
+    </ul>
+    <span class="svc-badge badge-free">Free</span>
+  </div>
+
+  <!-- 16. Content Ideas Engine -->
+  <div class="svc-card rv d2">
+    <span class="svc-icon">💡</span>
+    <div class="svc-title">Content Ideas Engine</div>
+    <div class="svc-desc">Never run out of ideas. Our engine monitors trending topics, formats, and angles in your niche and generates a personalised content calendar on demand.</div>
+    <ul class="svc-list">
+      <li>Trend-aware idea generation</li>
+      <li>Viral format suggestions (POV, GRWM, Day-in-life)</li>
+      <li>Weekly content calendar output</li>
+      <li>Competitor angle analysis</li>
+    </ul>
+    <span class="svc-badge badge-pro">Pro</span>
+  </div>
+
+  <div class="svc-divider rv"></div>
+
+  <!-- Workspace Section Label -->
+  <div class="svc-section-label rv">
+    <span>Profile</span>
+  </div>
+
+  <!-- 17. Creator Profile Engine -->
+  <div class="svc-card rv d1" style="grid-column:1/-1">
+    <span class="svc-icon">🎯</span>
+    <div class="svc-title">Creator Profile Engine</div>
+    <div class="svc-desc">Tell KreatorAI about your niche, platforms, and audience once. Every output after that — text, video, images, and voice — is tailored to your unique creator identity, not generic or templated.</div>
+    <ul class="svc-list">
+      <li>Set niche, platforms, and content style</li>
+      <li>AI adapts every output to your audience</li>
+      <li>Profile-aware suggestions across all tools</li>
+      <li>Update anytime as you grow</li>
+    </ul>
+    <span class="svc-badge badge-free">Free</span>
+  </div>
+
+</div>
+
+<div class="divl" style="margin:0 48px"></div>
+
+<!-- ── CTA ─────────────────────────────────────── -->
+<div class="cta-b rv" style="margin:80px 48px 100px">
+  <div class="cta-b-left">
+    <h2>All Tools. <em>One Studio.</em></h2>
+    <p>Start free — no credit card, no commitment.</p>
+  </div>
+  <div class="cta-b-btns">
+    <a href="https://app.kreatoraistudio.com" class="btn btn-p" target="_blank" rel="noopener">Try All Tools Free</a>
+    <a class="btn btn-s" onclick="showPage('pricing')">View Pricing</a>
+  </div>
+</div>

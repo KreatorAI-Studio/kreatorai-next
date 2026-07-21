@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "default": "kreatorai-bbbdd"
+  },
+  "targets": {
+    "kreatorai-bbbdd": {
+      "hosting": {
+        "landing": [
+          "kreatoraistudio-landing"
+        ],
+        "land": [
+          "kreatorai-land"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

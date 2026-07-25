@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, ReactElement } from "react";
 import Link from "next/link";
 import {
   HiSparkles,
@@ -17,7 +17,7 @@ interface PersonaSection {
   title: string;
   subtitle: string;
   badge: string;
-  icon: JSX.Element;
+  icon: ReactElement;
   heroText: string;
   features: {
     title: string;

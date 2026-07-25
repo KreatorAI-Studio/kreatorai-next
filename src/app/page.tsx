@@ -66,20 +66,34 @@ export default function Home() {
             </p>
           </ScrollReveal>
           <ScrollReveal delay={0.08}>
-            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 opacity-80">
-              <FaInstagram className="w-7 h-7" style={{ color: "var(--text2)" }} />
-              <FaLinkedin className="w-7 h-7" style={{ color: "var(--text2)" }} />
-              <FaXTwitter className="w-7 h-7" style={{ color: "var(--text2)" }} />
-              <FaYoutube className="w-7 h-7" style={{ color: "var(--text2)" }} />
-              <FaTiktok className="w-7 h-7" style={{ color: "var(--text2)" }} />
-              <FaFacebook className="w-7 h-7" style={{ color: "var(--text2)" }} />
-              <TbBrandThreads className="w-7 h-7" style={{ color: "var(--text2)" }} />
-              <FaPinterest className="w-7 h-7" style={{ color: "var(--text2)" }} />
-              <FaFigma className="w-7 h-7" style={{ color: "var(--text2)" }} />
-              <FaGoogleDrive className="w-7 h-7" style={{ color: "var(--text2)" }} />
-              <FaDropbox className="w-7 h-7" style={{ color: "var(--text2)" }} />
-              <TbBrandZapier className="w-7 h-7" style={{ color: "var(--text2)" }} />
-              <TbBrandOpenai className="w-7 h-7" style={{ color: "var(--text2)" }} />
+            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+              {[
+                { Icon: FaInstagram, color: "#E4405F" },
+                { Icon: FaLinkedin, color: "#0A66C2" },
+                { Icon: FaXTwitter, color: "var(--text)" },
+                { Icon: FaYoutube, color: "#FF0000" },
+                { Icon: FaTiktok, color: "#FE2C55" },
+                { Icon: FaFacebook, color: "#1877F2" },
+                { Icon: TbBrandThreads, color: "var(--text)" },
+                { Icon: FaPinterest, color: "#E60023" },
+                { Icon: FaFigma, color: "#F24E1E" },
+                { Icon: FaGoogleDrive, color: "#4285F4" },
+                { Icon: FaDropbox, color: "#0061FF" },
+                { Icon: TbBrandZapier, color: "#FF4F00" },
+                { Icon: TbBrandOpenai, color: "#10A37F" },
+              ].map(({ Icon, color }, i) => (
+                <span
+                  key={i}
+                  className="integ-icon"
+                  style={{
+                    // @ts-ignore custom property for hover colour
+                    "--brand": color,
+                    animationDelay: `${i * 0.18}s`,
+                  }}
+                >
+                  <Icon className="w-7 h-7" />
+                </span>
+              ))}
             </div>
           </ScrollReveal>
         </div>

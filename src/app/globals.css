@@ -1039,3 +1039,28 @@ footer {
   color:var(--text2); transition:.2s ease;
 }
 .social-btn:hover { color:var(--text); border-color:var(--border-pp); background:rgba(124,77,255,.1) }
+
+/* ── Homepage: integrations logo strip ── */
+.integ-icon {
+  display:inline-flex;
+  color:var(--text2);
+  opacity:.75;
+  cursor:pointer;
+  animation:integFloat 4.5s ease-in-out infinite;
+  transition:color .3s ease, opacity .3s ease, transform .3s ease, filter .3s ease;
+  will-change:transform;
+}
+.integ-icon:hover {
+  color:var(--brand, var(--p2));
+  opacity:1;
+  transform:translateY(-6px) scale(1.16);
+  filter:drop-shadow(0 6px 14px rgba(124,77,255,.35));
+  animation-play-state:paused;
+}
+@keyframes integFloat {
+  0%, 100% { transform:translateY(0); }
+  50% { transform:translateY(-5px); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .integ-icon { animation:none; }
+}

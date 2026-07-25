@@ -1,18 +1,20 @@
 "use client";
 
-import { useRef, useEffect, useState, ReactNode } from "react";
+import { useRef, useEffect, useState, ReactNode, CSSProperties } from "react";
 
 interface ScrollRevealProps {
   children: ReactNode;
   delay?: number;
   className?: string;
   y?: number;
+  style?: CSSProperties;
 }
 
 export default function ScrollReveal({
   children,
   delay = 0,
   className = "",
+  style = {},
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -38,6 +40,7 @@ export default function ScrollReveal({
       ref={ref}
       className={className}
       style={{
+        ...style,
         opacity: visible ? 1 : 0,
         transform: visible ? "none" : "translateY(20px)",
         transition: `opacity 0.5s ease ${delay}s, transform 0.5s ease ${delay}s`,

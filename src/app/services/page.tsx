@@ -2,225 +2,75 @@
 
 import { useState } from "react";
 import Link from "next/link";
-
-// ── Credit cost badge helper
-const cr = (n: number) => `${n} credits`;
-
-// ── Platform management — the core "all-in-one manager" layer (no credit cost)
-const platformTools = [
-  {
-    icon: "📅", title: "Schedule & Publish Everywhere", badge: "All Plans",
-    desc: "Plan once, publish everywhere. Connect Instagram, LinkedIn, X, YouTube and more, then schedule content to go live across every platform from a single calendar.",
-    items: ["One calendar for every connected platform", "Auto-publish at your chosen time", "Bulk-schedule entire campaigns", "No more manual cross-posting"],
-  },
-  {
-    icon: "🗂️", title: "Multiple Workspaces", badge: "All Plans",
-    desc: "Running more than one brand, client, or creator account? Keep each one fully separate — its own content, schedule, connected platforms, and history.",
-    items: ["Full content separation per workspace", "Switch workspaces instantly", "Built for agencies & multi-brand creators", "Independent scheduling per workspace"],
-  },
-  {
-    icon: "📊", title: "Analytics Dashboard", badge: "All Plans",
-    desc: "See how every post performs across every platform, side by side, in one dashboard — no more jumping between apps to check your numbers.",
-    items: ["Unified analytics across all platforms", "Engagement, reach & growth tracking", "Best-performing content insights", "Per-platform and combined views"],
-  },
-];
-
-// ── Studio-only heavy tools
-const studioTools = [
-  {
-    icon: "🎭", title: "Faceless Video Generation", badge: "Studio Only", hl: true,
-    cost: cr(300),
-    desc: "Generate complete faceless videos with a full scene pipeline — no camera required. AI assembles visuals, voice, and music into a finished video.",
-    items: [
-      `Full AI scene pipeline — text to finished video (${cr(300)})`,
-      "Auto B-roll & stock footage assembly",
-      "AI voiceover + background music included",
-      "Ready for YouTube, Reels, TikTok",
-    ],
-  },
-  {
-    icon: "🤖", title: "AI Avatar Videos", badge: "Studio Only", hl: true,
-    cost: cr(200),
-    desc: "Create a custom AI avatar and have it present your content — standard or ultra-realistic Pro quality. No filming or studio required.",
-    items: [
-      `Avatar Video Standard — HeyGen Avatar III (${cr(200)})`,
-      `Avatar Video Pro — Ultra-realistic HeyGen Avatar IV (${cr(350)})`,
-      `Create your own avatar from photos (${cr(200)})`,
-      "Lip-synced to your script or voiceover",
-    ],
-  },
-  {
-    icon: "✨", title: "Motion Graphics", badge: "Studio Only", hl: false,
-    cost: cr(15),
-    desc: "AI-generated motion graphics for intros, outros, lower thirds, and visual effects — polished animated elements for any content type.",
-    items: [
-      `AI-generated motion graphic elements (${cr(15)})`,
-      "Intros, outros & lower thirds",
-      "Export-ready animated assets",
-      "Matches your brand colours & style",
-    ],
-  },
-];
-
-// ── Video & media tools
-const videoTools = [
-  {
-    icon: "🎬", title: "AI Video Generation", badge: "Max / Studio", hl: true,
-    cost: cr(50),
-    desc: "Turn ideas into polished video — from text prompts, images, or existing footage. Three powerful modes cover every production scenario.",
-    items: [
-      `Text-to-Video — generate cinematic clips from a prompt (${cr(50)})`,
-      `Image-to-Video — animate any still into a moving scene (${cr(60)})`,
-      `Video-to-Video — restyle or transform existing footage (${cr(70)})`,
-    ],
-  },
-  {
-    icon: "🖼️", title: "AI Image Generation", badge: "All Plans", hl: false,
-    cost: cr(20),
-    desc: "Create stunning visuals for thumbnails, ads, and mood boards. Four modes give you full creative control over every image.",
-    items: [
-      `Text-to-Image — generate high-res visuals from a prompt (${cr(20)})`,
-      `Image-to-Image — remix & refine existing photos with AI (${cr(25)})`,
-      `Aspect Ratio Changer — reframe any image for any platform (${cr(18)})`,
-      `Background Remover — one-tap clean cutouts (${cr(18)})`,
-    ],
-  },
-  {
-    icon: "🖼️", title: "Thumbnail Generation", badge: "All Plans", hl: false,
-    cost: cr(20),
-    desc: "Generate 3 pro-quality thumbnail variants from a prompt — click-worthy designs optimised for YouTube, Reels, and shorts.",
-    items: [
-      `3 thumbnail variants per generation (${cr(20)})`,
-      "Platform-specific compositions",
-      "Bold text, face focus & colour pop styles",
-      "One-tap download",
-    ],
-  },
-  {
-    icon: "🎵", title: "Audio Tools", badge: "All Plans", hl: true,
-    cost: cr(15),
-    desc: "Give your content a professional sound layer — AI voices, premium ElevenLabs voices, and royalty-free music, all generated in-app.",
-    items: [
-      `Text-to-Speech Standard — realistic AI voice-overs (${cr(25)})`,
-      `Text-to-Speech Premium — ElevenLabs ultra-natural voices (${cr(45)})`,
-      `Background Music — AI-generated mood-matched tracks (${cr(15)})`,
-      `AI Music Generation via Suno — custom songs from text (${cr(30)})`,
-    ],
-  },
-  {
-    icon: "🎙️", title: "Caption Generation", badge: "All Plans", hl: false,
-    cost: cr(22),
-    desc: "Upload your video and KreatorAI automatically analyses the audio to generate accurate, styled captions — ready to burn in or export.",
-    items: [
-      "AI video analysis & speech recognition",
-      "Auto-synced captions with timing",
-      "Multiple caption style presets",
-      "Export-ready for any platform",
-    ],
-  },
-  {
-    icon: "📦", title: "Asset Pack", badge: "All Plans", hl: false,
-    cost: cr(35),
-    desc: "Generate a full content asset pack in one click — a set of images and ready-to-post captions delivered as a ZIP, covering multiple angles and formats.",
-    items: [
-      `Full image + caption bundle (${cr(35)})`,
-      "Multiple platform formats in one pack",
-      "Brand-consistent visual set",
-      "Instant ZIP download",
-    ],
-  },
-];
-
-// ── Text / content tools (all plans, credit-gated)
-const contentTools = [
-  {
-    icon: "📝", title: "Script Generator", badge: "All Plans", cost: cr(12),
-    desc: "Generate shot-by-shot scripts for Reels, Shorts, and long-form YouTube. Hook-first, production-ready, niche-matched.",
-    items: ["Hook-first content structure", "Shot-by-shot breakdown", "Platform-optimised length", "Niche-specific tone matching"],
-  },
-  {
-    icon: "📄", title: "Description Generator", badge: "All Plans", cost: cr(6),
-    desc: "Auto-generate SEO-optimised descriptions for YouTube, Reels, and posts. Keyword-rich, human-sounding, discovery-ready.",
-    items: ["SEO-optimised keywords", "Platform-specific formatting", "Hook + body + CTA structure", "Character count aware"],
-  },
-  {
-    icon: "💡", title: "Content Ideas Engine", badge: "All Plans", cost: cr(10),
-    desc: "Never run out of ideas. Get AI-powered topic suggestions tailored to your niche, platform, and trending formats.",
-    items: ["Trend-aware suggestions", "Niche-specific angles", "Series & format ideas", "Seasonal content planning"],
-  },
-  {
-    icon: "#️⃣", title: "Hashtag Generator", badge: "All Plans", cost: cr(4),
-    desc: "Platform-aware hashtag sets ranked by reach and niche relevance. Stop guessing — use data-backed tags that actually grow reach.",
-    items: ["Ranked by reach & relevance", "Platform-specific sets (IG, TikTok, YT)", "Niche + trending mix", "One-tap copy"],
-  },
-  {
-    icon: "🪝", title: "Hook Generator", badge: "All Plans", cost: cr(10),
-    desc: "Generate scroll-stopping opening lines for any platform. First 3 seconds matter — let AI nail them for you.",
-    items: ["Multiple hook styles & tones", "Platform-specific hooks (Reels, Shorts, TikTok)", "A/B variants in one generation", "Niche-matched phrasing"],
-  },
-  {
-    icon: "♻️", title: "Repurpose Content", badge: "All Plans", cost: cr(12),
-    desc: "Turn one piece of content into many. Transform a YouTube script into a tweet thread, blog post, or Instagram caption instantly.",
-    items: ["Cross-platform reformatting", "Tone & length adaptation", "One-click multi-format output", "Preserves key messaging"],
-  },
-  {
-    icon: "✏️", title: "Edit Guide", badge: "All Plans", cost: cr(8),
-    desc: "Get a detailed editing plan for your video — cuts, pacing, transitions, and B-roll suggestions written out for you.",
-    items: ["Cut-by-cut editing notes", "Pacing & rhythm suggestions", "B-roll placement guide", "Platform-specific edit style"],
-  },
-  {
-    icon: "🏷️", title: "Generate Title", badge: "All Plans", cost: cr(6),
-    desc: "Click-worthy, SEO-friendly titles for YouTube, Reels, and blog posts. Tested formats that drive views.",
-    items: ["Multiple title variants", "Curiosity-gap & value-first formats", "Keyword-aware for SEO", "Platform-specific length tuning"],
-  },
-];
+import {
+  FaFigma,
+  FaGoogleDrive,
+  FaDropbox,
+  FaYoutube,
+  FaLinkedin,
+  FaInstagram,
+  FaTiktok,
+} from "react-icons/fa6";
+import {
+  TbBrandOpenai,
+  TbBrandZapier,
+  TbBrandThreads,
+} from "react-icons/tb";
+import { 
+  HiSparkles, 
+  HiUserGroup, 
+  HiLink, 
+  HiCalendar, 
+  HiChartBar, 
+  HiVideoCamera,
+  HiCpuChip,
+  HiFolder
+} from "react-icons/hi2";
 
 export default function ServicesPage() {
-  const [category, setCategory] = useState<"all" | "platform" | "video" | "media" | "content">("all");
+  const [activeTab, setActiveTab] = useState<string>("all");
+
+  const categoryTabs = [
+    { id: "all", label: "✨ All Capabilities" },
+    { id: "integrations", label: "🔗 Integrations" },
+    { id: "biopage", label: "🌐 Bio Page Creator" },
+    { id: "collab", label: "👥 Team Collab" },
+    { id: "ai-assistant", label: "🤖 AI Assistant" },
+    { id: "video", label: "🎬 Pro Video & Avatars" },
+    { id: "publishing", label: "📅 Publisher & Analytics" },
+  ];
 
   return (
-    <>
-      <div className="page-hero">
-        <div style={{ justifyContent: "center", display: "inline-flex" }} className="kicker">Our Tools</div>
-        <h1>Every Tool a<br /><em>Creator Needs</em></h1>
-        <p>
-          The all-in-one social media manager — create, schedule, publish, and track performance
-          across every platform, plus 20+ AI-powered content tools, all in one place.
+    <div className="min-h-screen pb-28">
+      {/* ── HERO SECTION ───────────────────────────── */}
+      <div className="page-hero text-center pt-32 pb-16 px-6 max-w-4xl mx-auto">
+        <div className="kicker inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold uppercase tracking-wider mb-6">
+          <HiSparkles className="w-4 h-4 text-purple-400" />
+          KreatorAI Capabilities & Tools
+        </div>
+        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6" style={{ color: "var(--text)" }}>
+          Everything Your Social Media <br className="hidden sm:inline" />
+          <em className="bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400 bg-clip-text text-transparent not-italic">
+            Workflow Needs
+          </em>
+        </h1>
+        <p className="text-lg sm:text-xl max-w-2xl mx-auto font-medium" style={{ color: "var(--text2)" }}>
+          From seamless integrations with Canva & Figma to team collaboration, custom Bio Pages, and an inbuilt conversational AI co-pilot.
         </p>
 
-        {/* Category Filter Tabs */}
-        <div style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: 8,
-          flexWrap: "wrap",
-          marginTop: 32,
-        }}>
-          {[
-            { id: "all", label: "✨ All 20+ Tools" },
-            { id: "video", label: "🎬 AI Video & Avatars" },
-            { id: "media", label: "🎵 Audio & Media" },
-            { id: "content", label: "📝 Content & Writing" },
-            { id: "platform", label: "📅 Publishing & Analytics" },
-          ].map((tab) => {
-            const isActive = category === tab.id;
+        {/* Category Filter Pills */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mt-10">
+          {categoryTabs.map((tab) => {
+            const isActive = activeTab === tab.id;
             return (
               <button
                 key={tab.id}
-                onClick={() => setCategory(tab.id as any)}
-                style={{
-                  padding: "8px 18px",
-                  borderRadius: 100,
-                  fontFamily: "var(--fh)",
-                  fontSize: ".82rem",
-                  fontWeight: 700,
-                  cursor: "pointer",
-                  transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
-                  background: isActive ? "var(--grad)" : "rgba(255, 255, 255, 0.04)",
-                  color: isActive ? "#fff" : "var(--text2)",
-                  border: isActive ? "1px solid transparent" : "1px solid rgba(255, 255, 255, 0.08)",
-                  boxShadow: isActive ? "0 0 24px rgba(124, 77, 255, 0.4)" : "none",
-                }}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+                  isActive
+                    ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/30 border-transparent"
+                    : "bg-white/5 dark:bg-white/5 border border-slate-200/20 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:bg-white/10"
+                }`}
               >
                 {tab.label}
               </button>
@@ -229,145 +79,313 @@ export default function ServicesPage() {
         </div>
       </div>
 
-      {/* ── PUBLISH, MANAGE & ANALYZE ───────────────────────────── */}
-      {(category === "all" || category === "platform") && (
-        <div className="services-grid">
-          <div className="svc-section-label"><span>Publish, Manage & Analyze — All Platforms, One Place</span></div>
-          {platformTools.map((s, i) => (
-            <div key={i} className="svc-card hl svc-shimmer">
-              <span className="svc-icon" style={{ display: "inline-block" }}>{s.icon}</span>
-              <div className="svc-title">{s.title}</div>
-              <div className="svc-desc">{s.desc}</div>
-              <ul className="svc-list">{s.items.map((it, j) => <li key={j}>{it}</li>)}</ul>
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 12 }}>
-                <span className="svc-badge badge-free">{s.badge}</span>
+      <div className="max-w-6xl mx-auto px-6 space-y-16">
+        
+        {/* ── 1. CORE INTEGRATIONS SUITE ─────────────────── */}
+        {(activeTab === "all" || activeTab === "integrations") && (
+          <section className="rounded-3xl p-8 sm:p-10 border transition-all" style={{ background: "var(--card-solid)", borderColor: "var(--border-p)" }}>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-3 rounded-2xl bg-purple-500/10 text-purple-400">
+                <HiFolder className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-purple-400">Connected Ecosystem</span>
+                <h2 className="text-2xl sm:text-3xl font-extrabold" style={{ color: "var(--text)" }}>
+                  Deep Tool & Platform Integrations
+                </h2>
               </div>
             </div>
-          ))}
-        </div>
-      )}
+            <p className="text-base mb-8 max-w-3xl" style={{ color: "var(--text2)" }}>
+              No more exporting, re-downloading, or tab switching. KreatorAI connects directly into your existing design, AI, cloud storage, and automation workflow.
+            </p>
 
-      {/* ── CREDIT EXPLAINER STRIP ──────────────────────────────── */}
-      <div style={{
-        maxWidth: 720, margin: "0 auto clamp(40px,6vw,64px)",
-        padding: "20px 28px",
-        borderRadius: 16,
-        border: "1px solid rgba(124,77,255,.2)",
-        background: "rgba(124,77,255,.06)",
-        display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap",
-      }}>
-        <span style={{ fontSize: "1.6rem" }}>⚡</span>
-        <div>
-          <div style={{ fontFamily: "var(--fh)", fontWeight: 700, fontSize: ".9rem", color: "var(--text)", marginBottom: 4 }}>
-            How credits work
-          </div>
-          <div style={{ fontSize: ".8rem", color: "var(--text2)", lineHeight: 1.6 }}>
-            Every plan includes a monthly credit allowance that resets on the 1st.
-            Each AI action costs a set number of credits — only deducted on successful generations.
-            {" "}<Link href="/pricing" style={{ color: "var(--p3)", fontWeight: 600 }}>See all plans →</Link>
-          </div>
-        </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="p-6 rounded-2xl border bg-white/5 dark:bg-white/5 border-slate-200/10 dark:border-white/10">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="font-extrabold text-xl text-[#00C4CC]">Canva</span>
+                  <FaFigma className="w-7 h-7 text-[#F24E1E]" />
+                  <h3 className="font-bold text-lg" style={{ color: "var(--text)" }}>Canva & Figma Sync</h3>
+                </div>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>
+                  Import design templates, brand kits, and graphics straight into your social calendar. Auto-generate thumbnails and post graphics without leaving KreatorAI.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl border bg-white/5 dark:bg-white/5 border-slate-200/10 dark:border-white/10">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="font-extrabold text-xl text-[#D97706]">Claude</span>
+                  <TbBrandOpenai className="w-7 h-7 text-[#10A37F]" />
+                  <h3 className="font-bold text-lg" style={{ color: "var(--text)" }}>Claude & ChatGPT LLMs</h3>
+                </div>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>
+                  Powered by Anthropic’s Claude 3.5 Sonnet and OpenAI GPT-4o. Get deep reasoning for viral hooks, retention-focused video scripts, and nuanced copywriting.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl border bg-white/5 dark:bg-white/5 border-slate-200/10 dark:border-white/10">
+                <div className="flex items-center gap-3 mb-3">
+                  <FaGoogleDrive className="w-6 h-6 text-[#4285F4]" />
+                  <FaDropbox className="w-6 h-6 text-[#0061FF]" />
+                  <TbBrandZapier className="w-6 h-6 text-[#FF4F00]" />
+                  <h3 className="font-bold text-lg" style={{ color: "var(--text)" }}>Cloud & Zapier</h3>
+                </div>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>
+                  Auto-sync raw footage from Google Drive or Dropbox. Connect KreatorAI to 5,000+ web applications via Zapier Webhooks for automated publishing pipelines.
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ── 2. LINK-IN-BIO CREATOR ───────────────────── */}
+        {(activeTab === "all" || activeTab === "biopage") && (
+          <section className="rounded-3xl p-8 sm:p-10 border transition-all" style={{ background: "var(--card-solid)", borderColor: "var(--border-p)" }}>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-3 rounded-2xl bg-pink-500/10 text-pink-400">
+                <HiLink className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-pink-400">Custom Landing Sites</span>
+                <h2 className="text-2xl sm:text-3xl font-extrabold" style={{ color: "var(--text)" }}>
+                  High-Converting Bio Page Creator
+                </h2>
+              </div>
+            </div>
+            <p className="text-base mb-8 max-w-3xl" style={{ color: "var(--text2)" }}>
+              Turn your social bio traffic into leads and revenue. Build gorgeous, lightning-fast Link-in-Bio pages customized to your personal brand in under 2 minutes.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="p-6 rounded-2xl border bg-white/5 dark:bg-white/5 border-slate-200/10 dark:border-white/10">
+                <div className="text-2xl mb-2">🎨</div>
+                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--text)" }}>Custom Themes & Domains</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>
+                  Choose from glassmorphism, dark aesthetic, or clean light templates. Connect your custom domain e.g. <code className="text-xs bg-purple-500/10 text-purple-400 px-1.5 py-0.5 rounded">links.yourbrand.com</code>.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl border bg-white/5 dark:bg-white/5 border-slate-200/10 dark:border-white/10">
+                <div className="text-2xl mb-2">📹</div>
+                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--text)" }}>Rich Media Embeds</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>
+                  Embed YouTube videos, Spotify tracks, latest Instagram Reels, newsletter signup forms, and digital product checkout links directly into your Bio Page.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl border bg-white/5 dark:bg-white/5 border-slate-200/10 dark:border-white/10">
+                <div className="text-2xl mb-2">📈</div>
+                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--text)" }}>Bio Traffic Analytics</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>
+                  Track unique page visitors, link click-through rates (CTR), top referring platforms, and geographic audience analytics in real-time.
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ── 3. TEAM COLLABORATION ────────────────────── */}
+        {(activeTab === "all" || activeTab === "collab") && (
+          <section className="rounded-3xl p-8 sm:p-10 border transition-all" style={{ background: "var(--card-solid)", borderColor: "var(--border-p)" }}>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-3 rounded-2xl bg-indigo-500/10 text-indigo-400">
+                <HiUserGroup className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-indigo-400">Agencies & Teams</span>
+                <h2 className="text-2xl sm:text-3xl font-extrabold" style={{ color: "var(--text)" }}>
+                  Multi-User Team Collaboration
+                </h2>
+              </div>
+            </div>
+            <p className="text-base mb-8 max-w-3xl" style={{ color: "var(--text2)" }}>
+              Never pass video files over email or Slack again. Invite client managers, video editors, and copywriters to work side-by-side in structured brand workspaces.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="p-6 rounded-2xl border bg-white/5 dark:bg-white/5 border-slate-200/10 dark:border-white/10">
+                <div className="text-2xl mb-2">🔐</div>
+                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--text)" }}>Granular Team Roles</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>
+                  Assign role permissions (Workspace Owner, Content Editor, Client Reviewer, Viewer) so everyone has access to only what they need.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl border bg-white/5 dark:bg-white/5 border-slate-200/10 dark:border-white/10">
+                <div className="text-2xl mb-2">💬</div>
+                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--text)" }}>Live Post Approval Threads</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>
+                  Clients and team leads can leave feedback, request script edits, or approve posts before they go live on connected social platforms.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl border bg-white/5 dark:bg-white/5 border-slate-200/10 dark:border-white/10">
+                <div className="text-2xl mb-2">🗂️</div>
+                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--text)" }}>Shared Brand Asset Kits</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>
+                  Store brand logos, custom fonts, color palettes, intros, and audio stings in one shared hub accessible across every project in the workspace.
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ── 4. INBUILT AI ASSISTANT ────────────────────── */}
+        {(activeTab === "all" || activeTab === "ai-assistant") && (
+          <section className="rounded-3xl p-8 sm:p-10 border transition-all" style={{ background: "var(--card-solid)", borderColor: "var(--border-p)" }}>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-3 rounded-2xl bg-emerald-500/10 text-emerald-400">
+                <HiCpuChip className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">24/7 Creator Sidekick</span>
+                <h2 className="text-2xl sm:text-3xl font-extrabold" style={{ color: "var(--text)" }}>
+                  Inbuilt Conversational AI Assistant
+                </h2>
+              </div>
+            </div>
+            <p className="text-base mb-8 max-w-3xl" style={{ color: "var(--text2)" }}>
+              Meet your 24/7 AI creative partner inside KreatorAI. Ask questions, brainstorm viral angles, optimize existing captions, or get strategic advice tailored to your niche.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="p-6 rounded-2xl border bg-white/5 dark:bg-white/5 border-slate-200/10 dark:border-white/10">
+                <div className="text-2xl mb-2">💡</div>
+                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--text)" }}>Instant Brainstorming</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>
+                  Prompt the assistant: <em className="text-xs bg-emerald-500/10 text-emerald-400 px-1.5 py-0.5 rounded">"Give me 5 viral video angles for a tech SaaS launch"</em> and get production-ready concepts in seconds.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl border bg-white/5 dark:bg-white/5 border-slate-200/10 dark:border-white/10">
+                <div className="text-2xl mb-2">✍️</div>
+                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--text)" }}>Copy & Caption Rewriter</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>
+                  Ask the assistant to rewrite any text for a specific platform tone — make it punchy for X (Twitter), professional for LinkedIn, or casual for TikTok.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl border bg-white/5 dark:bg-white/5 border-slate-200/10 dark:border-white/10">
+                <div className="text-2xl mb-2">📊</div>
+                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--text)" }}>Strategic Advice</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>
+                  Get automated posting frequency recommendations, optimal hashtag strategies, and audience retention tips customized to your channel metrics.
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ── 5. PRO VIDEO & AI AVATARS ──────────────────── */}
+        {(activeTab === "all" || activeTab === "video") && (
+          <section className="rounded-3xl p-8 sm:p-10 border transition-all" style={{ background: "var(--card-solid)", borderColor: "var(--border-p)" }}>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-3 rounded-2xl bg-purple-500/10 text-purple-400">
+                <HiVideoCamera className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-purple-400">Studio Video Engine</span>
+                <h2 className="text-2xl sm:text-3xl font-extrabold" style={{ color: "var(--text)" }}>
+                  Faceless Video & Ultra-Realistic AI Avatars
+                </h2>
+              </div>
+            </div>
+            <p className="text-base mb-8 max-w-3xl" style={{ color: "var(--text2)" }}>
+              Create studio-quality video content without stepping in front of a camera. Generate complete faceless videos or create digital AI presenter avatars.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="p-6 rounded-2xl border bg-white/5 dark:bg-white/5 border-slate-200/10 dark:border-white/10">
+                <div className="text-2xl mb-2">🎭</div>
+                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--text)" }}>Faceless Shorts & Reels</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>
+                  Automated scene assembly — AI combines script, HD stock footage, ElevenLabs neural voiceover, and captions into a polished vertical video ready for Reels & Shorts.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl border bg-white/5 dark:bg-white/5 border-slate-200/10 dark:border-white/10">
+                <div className="text-2xl mb-2">🤖</div>
+                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--text)" }}>AI Presenter Avatars</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>
+                  Choose from 50+ hyper-realistic AI avatars or create your own custom digital twin from photos. Lip-synced to any voice or language.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl border bg-white/5 dark:bg-white/5 border-slate-200/10 dark:border-white/10">
+                <div className="text-2xl mb-2">✂️</div>
+                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--text)" }}>Long Video → Shorts Clipper</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>
+                  Paste a YouTube video link or upload a long podcast. KreatorAI automatically identifies viral moments, cuts them into 9:16 clips, and adds animated captions.
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ── 6. PUBLISHING & ANALYTICS ───────────────────── */}
+        {(activeTab === "all" || activeTab === "publishing") && (
+          <section className="rounded-3xl p-8 sm:p-10 border transition-all" style={{ background: "var(--card-solid)", borderColor: "var(--border-p)" }}>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-3 rounded-2xl bg-cyan-500/10 text-cyan-400">
+                <HiCalendar className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">Multi-Channel Command Center</span>
+                <h2 className="text-2xl sm:text-3xl font-extrabold" style={{ color: "var(--text)" }}>
+                  Automated Publishing & Cross-Platform Analytics
+                </h2>
+              </div>
+            </div>
+            <p className="text-base mb-8 max-w-3xl" style={{ color: "var(--text2)" }}>
+              Schedule once, auto-publish everywhere. Manage Instagram, LinkedIn, X (Twitter), YouTube, TikTok, Facebook, Threads, and Pinterest from a single calendar.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="p-6 rounded-2xl border bg-white/5 dark:bg-white/5 border-slate-200/10 dark:border-white/10">
+                <div className="text-2xl mb-2">📅</div>
+                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--text)" }}>Unified Content Calendar</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>
+                  Drag-and-drop scheduling across all connected accounts. Set custom publishing times for maximum audience engagement per platform.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl border bg-white/5 dark:bg-white/5 border-slate-200/10 dark:border-white/10">
+                <div className="text-2xl mb-2">📊</div>
+                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--text)" }}>Cross-Platform Dashboard</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>
+                  Compare views, engagement rates, follower growth, and click-through performance across all social accounts side-by-side.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl border bg-white/5 dark:bg-white/5 border-slate-200/10 dark:border-white/10">
+                <div className="text-2xl mb-2">⚡</div>
+                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--text)" }}>Smart Auto-Posting</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>
+                  Auto-publish video Shorts to YouTube, Reels to IG & Facebook, and video pins to Pinterest simultaneously without manual post triggers.
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
       </div>
 
-      {/* ── STUDIO-ONLY: FACELESS & AVATAR TOOLS ─────────────────── */}
-      {(category === "all" || category === "video") && (
-        <div className="services-grid">
-          <div className="svc-section-label"><span>Faceless Video & AI Avatars — Studio Plan Only</span></div>
-          {studioTools.map((s, i) => (
-            <div key={i} className={`svc-card${s.hl ? " hl svc-shimmer" : ""}`}>
-              <span className="svc-icon" style={{ display: "inline-block" }}>{s.icon}</span>
-              <div className="svc-title">{s.title}</div>
-              <div className="svc-desc">{s.desc}</div>
-              <ul className="svc-list">{s.items.map((it, j) => <li key={j}>{it}</li>)}</ul>
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 12 }}>
-                <span className="svc-badge badge-pro">{s.badge}</span>
-                <span style={{
-                  display: "inline-flex", alignItems: "center",
-                  padding: "3px 10px", borderRadius: 100,
-                  background: "rgba(6,182,212,.10)",
-                  border: "1px solid rgba(6,182,212,.25)",
-                  fontFamily: "var(--fh)", fontSize: ".62rem", fontWeight: 700,
-                  color: "#67e8f9", letterSpacing: ".05em",
-                }}>
-                  ⚡ from {s.cost}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* ── VIDEO / MEDIA TOOLS ─────────────────────────────────── */}
-      {(category === "all" || category === "video" || category === "media") && (
-        <div className="services-grid">
-          <div className="svc-section-label"><span>Video & Media Tools — All Plans (credit-gated)</span></div>
-          {videoTools.map((s, i) => (
-            <div key={i} className={`svc-card${s.hl ? " hl svc-shimmer" : ""}`}>
-              <span className="svc-icon" style={{ display: "inline-block" }}>{s.icon}</span>
-              <div className="svc-title">{s.title}</div>
-              <div className="svc-desc">{s.desc}</div>
-              <ul className="svc-list">{s.items.map((it, j) => <li key={j}>{it}</li>)}</ul>
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 12 }}>
-                <span className={`svc-badge ${s.badge === "Max / Studio" ? "badge-pro" : "badge-free"}`}>{s.badge}</span>
-                <span style={{
-                  display: "inline-flex", alignItems: "center",
-                  padding: "3px 10px", borderRadius: 100,
-                  background: "rgba(124,77,255,.10)",
-                  border: "1px solid rgba(124,77,255,.2)",
-                  fontFamily: "var(--fh)", fontSize: ".62rem", fontWeight: 700,
-                  color: "var(--p3)", letterSpacing: ".05em",
-                }}>
-                  ⚡ from {s.cost}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* ── TEXT / CONTENT TOOLS ─────────────────────────────── */}
-      {(category === "all" || category === "content") && (
-        <div className="services-grid">
-          <div className="svc-divider" />
-          <div className="svc-section-label"><span>Content Tools — All Plans</span></div>
-          {contentTools.map((s, i) => (
-            <div key={i} className="svc-card">
-              <span className="svc-icon" style={{ display: "inline-block" }}>{s.icon}</span>
-              <div className="svc-title">{s.title}</div>
-              <div className="svc-desc">{s.desc}</div>
-              <ul className="svc-list">{s.items.map((it, j) => <li key={j}>{it}</li>)}</ul>
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 12 }}>
-                <span className="svc-badge badge-free">{s.badge}</span>
-                <span style={{
-                  display: "inline-flex", alignItems: "center",
-                  padding: "3px 10px", borderRadius: 100,
-                  background: "rgba(124,77,255,.08)",
-                  border: "1px solid rgba(124,77,255,.18)",
-                  fontFamily: "var(--fh)", fontSize: ".62rem", fontWeight: 700,
-                  color: "var(--p3)", letterSpacing: ".05em",
-                }}>
-                  ⚡ {s.cost}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      <div className="divl" />
-
-      <div style={{ position: "relative", zIndex: 2 }}>
+      {/* ── CTA BANNER ───────────────────────────────── */}
+      <div className="max-w-6xl mx-auto px-6 mt-20">
         <div className="cta-b">
           <div>
-            <h2>Ready to Create <em>Faster</em>?</h2>
-            <p>Start free — no card needed.</p>
+            <h2>Ready to Transform Your <em>Social Media Workflow</em>?</h2>
+            <p>Start free today — no credit card required.</p>
           </div>
           <div className="cta-b-btns">
-            <a href="https://app.kreatoraistudio.com" className="btn btn-p" target="_blank" rel="noopener noreferrer">Start Free Today</a>
-            <Link href="/pricing" className="btn btn-s">See Pricing</Link>
+            <a href="https://app.kreatoraistudio.com" className="btn btn-p" target="_blank" rel="noopener noreferrer">
+              Start Free Today
+            </a>
+            <Link href="/pricing" className="btn btn-s">
+              See Pricing
+            </Link>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

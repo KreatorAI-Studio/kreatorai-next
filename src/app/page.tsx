@@ -1,7 +1,6 @@
 
 import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
-import HeroDemo from "@/components/HeroDemo";
 import WorkspaceHero from "@/components/WorkspaceHero";
 
 export default function Home() {
@@ -9,11 +8,6 @@ export default function Home() {
     <>
       {/* ── HERO WORKSPACE WITH FLOATING LOGOS ───────── */}
       <WorkspaceHero />
-
-      {/* ── INTERACTIVE STUDIO DEMO ─────────────────── */}
-      <section className="wrap pb-20 relative z-10">
-        <HeroDemo />
-      </section>
 
       {/* ── STATS ───────────────────────────────────── */}
       <ScrollReveal className="wrap pb-20 relative z-10">

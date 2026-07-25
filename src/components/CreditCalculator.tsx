@@ -25,11 +25,11 @@ export default function CreditCalculator() {
       margin: "64px auto",
       padding: "36px 40px",
       borderRadius: 24,
-      background: "rgba(15, 15, 26, 0.75)",
+      background: "var(--card-solid)",
       backdropFilter: "blur(20px)",
       WebkitBackdropFilter: "blur(20px)",
-      border: "1px solid rgba(169, 125, 255, 0.3)",
-      boxShadow: "0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+      border: "1px solid var(--border-p)",
+      boxShadow: "0 20px 60px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
     }}>
       <div style={{ textAlign: "center", marginBottom: 32 }}>
         <div style={{
@@ -152,7 +152,7 @@ export default function CreditCalculator() {
             width: "100%",
             padding: "12px",
             borderRadius: 12,
-            background: "rgba(7, 7, 15, 0.6)",
+            background: "var(--card)",
             border: `1px solid ${recommendedPlan.color}`,
             marginBottom: 16,
           }}>

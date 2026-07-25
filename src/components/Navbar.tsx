@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -54,6 +55,7 @@ export default function Navbar() {
         </ul>
 
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <ThemeToggle />
           <a
             href="https://app.kreatoraistudio.com"
             className="ncta"

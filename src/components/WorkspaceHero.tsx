@@ -256,13 +256,17 @@ export default function WorkspaceHero() {
         }}
       />
 
-      {/* Floating Official Platform Logo Cards */}
-      <div className="absolute inset-0 pointer-events-none z-10 max-w-[1300px] mx-auto overflow-hidden hidden sm:block">
-        {FLOATING_BADGES.map((badge) => {
+      {/* Floating Official Platform Logo Cards (Visible on both Mobile and Desktop) */}
+      <div className="absolute inset-0 pointer-events-none z-10 max-w-[1300px] mx-auto overflow-hidden block">
+        {FLOATING_BADGES.map((badge, idx) => {
+          // On small mobile screens, show a curated subset of floating logos positioned relative to screen edges
+          const isMobilePriority = ["youtube", "instagram", "x", "linkedin", "tiktok", "chatgpt", "canva", "gdrive"].includes(badge.id);
           return (
             <div
               key={badge.id}
-              className="absolute transition-transform duration-300 hover:scale-125 pointer-events-auto cursor-pointer group"
+              className={`absolute transition-transform duration-300 hover:scale-125 pointer-events-auto cursor-pointer group ${
+                isMobilePriority ? "block" : "hidden sm:block"
+              }`}
               style={{
                 top: badge.top,
                 left: badge.left,
@@ -272,7 +276,7 @@ export default function WorkspaceHero() {
               title={badge.name}
             >
               <div 
-                className="flex items-center justify-center p-3.5 rounded-2xl backdrop-blur-md transition-all duration-300 group-hover:scale-110"
+                className="flex items-center justify-center p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl backdrop-blur-md transition-all duration-300 group-hover:scale-110"
                 style={{
                   background: "var(--badge-bg)",
                   border: "1px solid var(--badge-border)",

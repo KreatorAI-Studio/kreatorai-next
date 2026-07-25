@@ -2,13 +2,70 @@
 
 import Link from "next/link";
 import { FaInstagram, FaXTwitter, FaGithub, FaLinkedin } from "react-icons/fa6";
-import { HiSparkles, HiLightningBolt, HiChip, HiGlobeAlt, HiCode } from "react-icons/hi";
+import {
+  HiSparkles,
+  HiLightningBolt,
+  HiChip,
+  HiGlobeAlt,
+  HiCode,
+  HiExclamationCircle,
+  HiCurrencyDollar,
+  HiClock,
+  HiViewGrid,
+  HiCheckCircle,
+  HiXCircle,
+  HiCube,
+} from "react-icons/hi";
 
 const values = [
   { icon: <HiLightningBolt className="w-6 h-6 text-purple-400" />, title: "Speed First", desc: "Every tool is engineered to eliminate creative bottlenecks and ship content fast." },
   { icon: <HiSparkles className="w-6 h-6 text-pink-400" />, title: "Creator-Centric", desc: "Built specifically for modern creators and agencies. Zero bloat, maximum output." },
   { icon: <HiChip className="w-6 h-6 text-cyan-400" />, title: "AI-Native Ecosystem", desc: "Deeply integrated with Claude 3.5 Sonnet, OpenAI, ElevenLabs, and HeyGen at the core." },
   { icon: <HiGlobeAlt className="w-6 h-6 text-emerald-400" />, title: "Universal Access", desc: "Democratizing studio-grade content tools for independent creators worldwide." },
+];
+
+const problems = [
+  {
+    icon: <HiViewGrid className="w-6 h-6 text-rose-400" />,
+    title: "The Tool Stack Is Fragmented",
+    desc: "A typical creator juggles a scriptwriting tool, a separate video generator, a scheduler, a link-in-bio app, and an analytics dashboard — none of which talk to each other.",
+  },
+  {
+    icon: <HiClock className="w-6 h-6 text-rose-400" />,
+    title: "Production Eats The Week",
+    desc: "Scripting, editing, captioning, and re-exporting for five different platforms turns a single idea into hours of manual, repetitive work.",
+  },
+  {
+    icon: <HiCurrencyDollar className="w-6 h-6 text-rose-400" />,
+    title: "Studio-Quality Tools Are Gatekept",
+    desc: "AI avatars, professional voice cloning, and multi-platform automation are usually priced for agencies and enterprises, not solo creators or small teams.",
+  },
+  {
+    icon: <HiExclamationCircle className="w-6 h-6 text-rose-400" />,
+    title: "Brand Consistency Breaks Down",
+    desc: "Without a shared brand kit, every new tool means re-uploading logos and re-explaining tone, so output drifts off-brand across platforms.",
+  },
+];
+
+const differentiators = [
+  {
+    icon: <HiCube className="w-6 h-6 text-purple-400" />,
+    title: "vs. Standalone Schedulers",
+    theyDo: "Great at queueing and publishing posts you've already made.",
+    weDo: "We generate the video, avatar presentation, and copy first — then schedule it, in the same workspace.",
+  },
+  {
+    icon: <HiChip className="w-6 h-6 text-purple-400" />,
+    title: "vs. Single-Purpose AI Video Tools",
+    theyDo: "Good at one job — an avatar, a voice clone, or a clipper — in isolation.",
+    weDo: "We chain scripting, generation, captioning, and publishing into one pipeline instead of five exports.",
+  },
+  {
+    icon: <HiGlobeAlt className="w-6 h-6 text-purple-400" />,
+    title: "vs. Hiring an Agency or Freelancers",
+    theyDo: "Deliver polished results, but at a price and turnaround built for larger budgets.",
+    weDo: "We put studio-grade generation and publishing directly in your hands, on demand, at self-serve pricing.",
+  },
 ];
 
 const techStack = [
@@ -44,8 +101,54 @@ export default function AboutPage() {
         </p>
       </div>
 
+      {/* ── THE PROBLEM ───────────────────────────────── */}
+      <div className="max-w-6xl mx-auto px-6 mb-24">
+        <div className="text-center mb-12">
+          <div className="kicker inline-flex" style={{ justifyContent: "center" }}>
+            The Problem
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold mt-3" style={{ color: "var(--text)" }}>
+            Content Creation Is Still <em className="not-italic bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Too Fragmented</em>
+          </h2>
+          <p className="text-base mt-3 max-w-2xl mx-auto" style={{ color: "var(--text2)" }}>
+            Before we built KreatorAI, we lived the same workflow most creators still deal with today.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {problems.map((p, i) => (
+            <div
+              key={i}
+              className="p-6 rounded-2xl border flex gap-4"
+              style={{ background: "var(--card-solid)", borderColor: "var(--border)" }}
+            >
+              <div className="p-3 rounded-xl bg-rose-500/10 h-fit flex-shrink-0">{p.icon}</div>
+              <div>
+                <h3 className="font-bold text-base mb-1.5" style={{ color: "var(--text)" }}>
+                  {p.title}
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>
+                  {p.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* ── MISSION STATEMENT BLOCK ──────────────────── */}
       <div className="max-w-5xl mx-auto px-6 mb-20">
+        <div className="text-center mb-10">
+          <div className="kicker inline-flex" style={{ justifyContent: "center" }}>
+            Our Mission
+          </div>
+          <p className="text-base mt-3 max-w-3xl mx-auto leading-relaxed" style={{ color: "var(--text2)" }}>
+            KreatorAI exists to close the gap between having an idea and having it published,
+            professionally, everywhere it needs to be. We build one connected workspace —
+            instead of another app to add to the pile — so creators, small teams, and agencies
+            can spend their time on the work that actually needs a human: strategy, voice, and taste.
+          </p>
+        </div>
         <div className="relative overflow-hidden p-8 sm:p-14 rounded-3xl border text-center" style={{ background: "var(--card-solid)", borderColor: "var(--border-p)" }}>
           <div className="absolute top-0 right-0 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
           <blockquote className="text-xl sm:text-3xl font-extrabold leading-snug tracking-tight max-w-3xl mx-auto mb-6" style={{ color: "var(--text)" }}>
@@ -58,6 +161,45 @@ export default function AboutPage() {
           <p className="text-sm font-bold uppercase tracking-widest text-purple-400">
             — The KreatorAI Mission
           </p>
+        </div>
+      </div>
+
+      {/* ── HOW WE'RE DIFFERENT ───────────────────────── */}
+      <div className="max-w-6xl mx-auto px-6 mb-24">
+        <div className="text-center mb-12">
+          <div className="kicker inline-flex" style={{ justifyContent: "center" }}>
+            How We're Different
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold mt-3" style={{ color: "var(--text)" }}>
+            We're Not Trying To Be <em className="not-italic bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Everything</em>
+          </h2>
+          <p className="text-base mt-3 max-w-2xl mx-auto" style={{ color: "var(--text2)" }}>
+            KreatorAI isn't the only way to create and publish content — here's honestly how it
+            compares to the alternatives, and where it fits.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {differentiators.map((d, i) => (
+            <div
+              key={i}
+              className="p-7 rounded-2xl border"
+              style={{ background: "var(--card-solid)", borderColor: "var(--border-p)" }}
+            >
+              <div className="p-3 rounded-xl bg-purple-500/10 w-fit mb-4">{d.icon}</div>
+              <h3 className="font-extrabold text-lg mb-4" style={{ color: "var(--text)" }}>
+                {d.title}
+              </h3>
+              <div className="flex items-start gap-2 mb-4 text-sm" style={{ color: "var(--text2)" }}>
+                <HiXCircle className="w-5 h-5 flex-shrink-0 mt-0.5 text-slate-500" />
+                <span>{d.theyDo}</span>
+              </div>
+              <div className="flex items-start gap-2 text-sm" style={{ color: "var(--text)" }}>
+                <HiCheckCircle className="w-5 h-5 flex-shrink-0 mt-0.5 text-emerald-400" />
+                <span>{d.weDo}</span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 

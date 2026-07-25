@@ -1,6 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import {
+  FaInstagram,
+  FaXTwitter,
+  FaGithub,
+  FaLinkedin,
+  FaYoutube,
+} from "react-icons/fa6";
 
 export default function Footer() {
   return (
@@ -79,8 +86,9 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
+            title="Instagram"
           >
-            IG
+            <FaInstagram className="w-4 h-4" />
           </a>
           <a
             href="https://twitter.com/kreatoraistudio"
@@ -88,8 +96,19 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="X / Twitter"
+            title="X (Twitter)"
           >
-            𝕏
+            <FaXTwitter className="w-4 h-4" />
+          </a>
+          <a
+            href="https://youtube.com/@kreatoraistudio"
+            className="fsl"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="YouTube"
+            title="YouTube"
+          >
+            <FaYoutube className="w-4 h-4" />
           </a>
           <a
             href="https://github.com/neil-surjiani"
@@ -97,8 +116,9 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
+            title="GitHub"
           >
-            GH
+            <FaGithub className="w-4 h-4" />
           </a>
           <a
             href="https://linkedin.com/in/neil-surjiani"
@@ -106,8 +126,9 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
+            title="LinkedIn"
           >
-            in
+            <FaLinkedin className="w-4 h-4" />
           </a>
         </div>
       </div>

@@ -2,39 +2,18 @@
 import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
 import HeroDemo from "@/components/HeroDemo";
+import WorkspaceHero from "@/components/WorkspaceHero";
 
 export default function Home() {
   return (
     <>
-      {/* ── HERO ────────────────────────────────────── */}
-      <div className="hero">
-        <div className="hero-left">
-          <div className="hbadge">
-            🧪 Beta
-          </div>
-          <h1 className="sh">
-            Your Complete<br />Social Media<br /><em>Command Center</em>
-          </h1>
-          <p className="hsub">
-            Create content, publish it everywhere, and track what works — all from one place. KreatorAI handles AI video, images, captions, and voice, then schedules and publishes across Instagram, LinkedIn, X, YouTube and more, with analytics built in.
-          </p>
-          <div className="hbtns">
-            <a
-              href="https://app.kreatoraistudio.com"
-              className="btn btn-p"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Start Free — No Card
-            </a>
-            <Link href="/services" className="btn btn-s">
-              Explore Tools
-            </Link>
-          </div>
-        </div>
+      {/* ── HERO WORKSPACE WITH FLOATING LOGOS ───────── */}
+      <WorkspaceHero />
 
+      {/* ── INTERACTIVE STUDIO DEMO ─────────────────── */}
+      <section className="wrap pb-20 relative z-10">
         <HeroDemo />
-      </div>
+      </section>
 
       {/* ── STATS ───────────────────────────────────── */}
       <ScrollReveal className="wrap pb-20 relative z-10">

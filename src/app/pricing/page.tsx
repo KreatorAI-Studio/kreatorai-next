@@ -200,6 +200,8 @@ const tableRows = [
 
 export default function PricingPage() {
   const [isAnnual, setIsAnnual] = useState(false);
+  const mainPlans = plans.filter((p) => p.id !== "custom");
+  const customPlan = plans.find((p) => p.id === "custom")!;
 
   return (
     <>
@@ -274,7 +276,7 @@ export default function PricingPage() {
           display: "grid",
           alignItems: "stretch",
         }}>
-          {plans.map((p, i) => (
+          {mainPlans.map((p, i) => (
             <div
               key={i}
               className={`pc2${p.feat ? " feat" : ""}`}
@@ -386,29 +388,7 @@ export default function PricingPage() {
                 </ul>
               </div>
 
-              {p.id === "custom" ? (
-                <a
-                  href={p.ctaLink}
-                  className="pbtn2"
-                  style={{
-                    width: "100%", marginTop: "auto", display: "block",
-                    background: "linear-gradient(90deg, #E879F9, #C026D3)",
-                    color: "#fff",
-                    boxShadow: "0 0 28px rgba(232, 121, 249, 0.4)",
-                    border: "none",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = "0 0 40px rgba(232, 121, 249, 0.6)";
-                    e.currentTarget.style.transform = "translateY(-2px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = "0 0 28px rgba(232, 121, 249, 0.4)";
-                    e.currentTarget.style.transform = "none";
-                  }}
-                >
-                  {p.cta}
-                </a>
-              ) : p.feat ? (
+              {p.feat ? (
                 <a
                   href={p.ctaLink}
                   className={`pbtn2 ${p.ctaClass}`}
@@ -445,6 +425,45 @@ export default function PricingPage() {
               )}
             </div>
           ))}
+        </div>
+
+        {/* ── CUSTOM / ENTERPRISE PLAN BANNER ── */}
+        <div className="custom-plan">
+          <div className="custom-plan-inner">
+            <div className="custom-plan-left">
+              <div className="custom-plan-name">{customPlan.name} Plan</div>
+              <p className="custom-plan-desc">{customPlan.desc}</p>
+              <div className="custom-plan-chips">
+                {customPlan.items.map((it, j) => (
+                  <span key={j} className="custom-plan-chip">{it}</span>
+                ))}
+              </div>
+            </div>
+            <div className="custom-plan-right">
+              <a
+                href={customPlan.ctaLink}
+                className="pbtn2"
+                style={{
+                  padding: "14px 32px",
+                  background: "linear-gradient(90deg, #E879F9, #C026D3)",
+                  color: "#fff",
+                  boxShadow: "0 0 28px rgba(232, 121, 249, 0.4)",
+                  border: "none",
+                  whiteSpace: "nowrap",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = "0 0 40px rgba(232, 121, 249, 0.6)";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = "0 0 28px rgba(232, 121, 249, 0.4)";
+                  e.currentTarget.style.transform = "none";
+                }}
+              >
+                {customPlan.cta}
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 

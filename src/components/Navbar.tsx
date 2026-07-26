@@ -100,7 +100,7 @@ export default function Navbar() {
           href="https://app.kreatoraistudio.com"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ color: "var(--p2)" }}
+          onClick={() => setMobileOpen(false)}
         >
           Launch App →
         </a>

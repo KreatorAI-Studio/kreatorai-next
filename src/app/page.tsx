@@ -32,7 +32,7 @@ export default function Home() {
 
       {/* ── STATS STRIP ───────────────────────────── */}
       <ScrollReveal className="wrap pb-20 relative z-10">
-        <div className="stats-strip" style={{ gridTemplateColumns: "repeat(4,1fr)" }}>
+        <div className="stats-strip cols-4">
           <div className="stat-item">
             <div className="stat-num">20+</div>
             <div className="stat-label">AI Creation Tools</div>

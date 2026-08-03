@@ -428,11 +428,11 @@ export default function PricingPage() {
         </div>
 
         {/* ── CUSTOM / ENTERPRISE PLAN BANNER ── */}
-        <div className="custom-plan">
+        <div className="custom-plan" style={{ marginBottom: 0, borderRadius: "24px 24px 0 0" }}>
           <div className="custom-plan-inner">
             <div className="custom-plan-left">
               <div className="custom-plan-name">{customPlan.name} Plan</div>
-              <p className="custom-plan-desc">{customPlan.desc}</p>
+              <p className="custom-plan-desc" style={{ marginBottom: "20px" }}>{customPlan.desc}</p>
               <div className="custom-plan-chips">
                 {customPlan.items.map((it, j) => (
                   <span key={j} className="custom-plan-chip">{it}</span>
@@ -451,18 +451,32 @@ export default function PricingPage() {
                   border: "none",
                   whiteSpace: "nowrap",
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = "0 0 40px rgba(232, 121, 249, 0.6)";
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = "0 0 28px rgba(232, 121, 249, 0.4)";
-                  e.currentTarget.style.transform = "none";
-                }}
               >
                 {customPlan.cta}
               </a>
             </div>
+          </div>
+          
+          {/* Integrated Elaboration Section */}
+          <div style={{ 
+            padding: "30px 40px", 
+            borderTop: "1px solid rgba(232, 121, 249, 0.2)",
+            background: "rgba(232, 121, 249, 0.02)",
+            display: "grid", 
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", 
+            gap: "20px" 
+          }}>
+            {[
+              { title: "Custom Scaling", desc: "Volume-based pricing that grows with you." },
+              { title: "White-Glove Support", desc: "Dedicated manager & priority SLAs." },
+              { title: "Team Management", desc: "Granular roles & shared workspaces." },
+              { title: "API & Integrations", desc: "Custom workflows & white-label output." }
+            ].map((feature, i) => (
+              <div key={i}>
+                <h4 style={{ margin: "0 0 5px 0", fontSize: "0.9rem", color: "#E879F9" }}>{feature.title}</h4>
+                <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text3)" }}>{feature.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
